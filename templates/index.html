@@ -1,0 +1,290 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <main class="main-content">
+    <!--== Start Hero Area Wrapper ==-->
+    <section class="home-slider-area slider-default">
+      <div class="home-slider-content">
+        <div class="swiper-container home-slider-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <!-- Start Slide Item -->
+              <div class="home-slider-item bg-img-cover" data-bg-img="{% static 'assets/img/slider/1.png' %}">
+                <div class="slider-content-area">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="content m-auto">
+                          <div class="inner-content">
+                            <div class="tittle-wrp">
+                              <h2>Ice Cream Coop <br>New item</h2>
+                            </div>
+                            <div class="btn-wrp">
+                              <a href="shop.html" class="btn-link">Shop Now</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End Slide Item -->
+            </div>
+            <div class="swiper-slide">
+              <!-- Start Slide Item -->
+              <div class="home-slider-item bg-img-cover" data-bg-img="{% static 'assets/img/slider/2.png' %}">
+                <div class="slider-content-area">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="content m-auto">
+                          <div class="inner-content">
+                            <div class="tittle-wrp">
+                              <h2>Kitchen tool crock <br>Featured Item</h2>
+                            </div>
+                            <div class="btn-wrp">
+                              <a href="shop.html" class="btn-link">Shop Now</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End Slide Item -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--== End Hero Area Wrapper ==-->
+
+    <!--== Start Product Area Wrapper ==-->
+    <section class="product-area latest-product-area" data-aos="fade-up" data-aos-duration="1000">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-lg-6 m-auto">
+            <div class="section-title text-center">
+              <h2 class="title">Latest product</h2>
+              <p>Our latest item collection of 2021</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="swiper-container product4-slider-container">
+            <div class="swiper-wrapper">
+              
+              {% for product in products %}
+              <div class="swiper-slide">
+                <!-- Start Product Item -->
+                <div class="product-item">
+                  <div class="product-thumb">
+                    <a href="{% url 'product_detail' product.id %}">
+                      <img src="{{ product.image.url }}" alt="Alan-Shop">                  
+                      <span class="ribbon ribbon-hot">Sale</span>
+                      <span class="ribbon ribbon-onsale align-right">-35%</span>
+                    </a>
+                    <div class="product-action">
+                      <a class="action-wishlist" href="shop-wishlist.html" title="Wishlist">
+                        <i class="ion-android-favorite-outline"></i>
+                      </a>
+                      <a class="action-quick-view" href="javascript:void(0);" title="Quick View">
+                        <i class="ion-ios-search-strong"></i>
+                      </a>
+                      <a class="action-cart" href="#/">
+                        <i class="fa fa-opencart"></i>
+                      </a>
+                    </div>
+                    <div class="countdown-content">
+                      <ul class="countdown-timer">
+                        <li><span class="days">00</span><p class="days_text">Days</p></li>
+                        <li><span class="hours">00</span><p class="hours_text">Hour</p></li>
+                        <li><span class="minutes">00</span><p class="minutes_text">Mint</p></li>
+                        <li><span class="seconds">00</span><p class="seconds_text">Sec</p></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="product-info">
+                    <h4 class="title"><a href="shop-single-product.html">{{ product.name }} </a></h4>
+                    <div class="prices">
+                      <span class="price">{{ product.discount_price }}</span>
+                      <del class="price-old">{{ product.price }} </del>
+                    </div>
+                  </div>
+                </div>
+                <!-- End Product Item -->
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--== End Product Area Wrapper ==-->
+
+    <!--== Start Offer Area Wrapper ==-->
+    <section class="offer-area" data-aos="fade-up" data-aos-duration="1000">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="single-offer">
+              <div class="thumb">
+                <a href="shop-single-product.html">
+                  <img src="{% static 'assets/img/shop/offer-1.webp' %}" alt="Alan-Shop">
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="single-offer">
+              <div class="thumb">
+                <a href="shop-single-product.html">
+                  <img src="{% static 'assets/img/shop/offer-2.webp' %}" alt="Alan-Shop">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--== End Offer Area Wrapper ==-->
+
+    <!--== Start Featured Product Area Wrapper ==-->
+    <section class="product-area featured-product-area" data-aos="fade-up" data-aos-duration="1000">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-lg-6 m-auto">
+            <div class="section-title text-center">
+              <h2 class="title">Featured Product</h2>
+              <p>Best selling item in our collection</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+          {% for product in products %}
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <!-- Start Product Item -->
+            <div class="product-item">
+              <div class="product-thumb">
+                <a href="{% url 'product_detail' product.id %}">
+                  <img src="{{product.image.url }}" alt="Alan-Shop">
+                  <div class="ribbons">
+                    <span class="ribbon ribbon-hot">Sale</span>
+                    <span class="ribbon ribbon-onsale align-right">-18%</span>
+                  </div>
+                </a>
+                <div class="product-action">
+                  <a class="action-wishlist" href="shop-wishlist.html" title="Wishlist">
+                    <i class="ion-android-favorite-outline"></i>
+                  </a>
+                  <a class="action-quick-view" href="javascript:void(0);" title="Quick View">
+                    <i class="ion-ios-search-strong"></i>
+                  </a>
+                  <a class="action-cart" href="#/">
+                    <i class="fa fa-opencart"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="product-info">
+                <h4 class="title"><a href="shop-single-product.html"></a>{{product.name}}</h4>
+                <div class="prices">
+                  <span class="price">{{ product.discount_price }} </span>
+                  <del class="price-old">{{ product.price }} </del>
+                </div>
+              </div>
+            </div>
+            <!-- End Product Item -->
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    <!--== End Featured Product Area Wrapper ==-->
+
+    <!--== Start Newsletter Area Wrapper ==-->
+    <section class="newsletter-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-lg-6 m-auto" data-aos="fade-up" data-aos-duration="1000">
+            <div class="section-title text-center">
+              <h2 class="title">Join to our Newsletter</h2>
+              <p>If you never miss our interesting news by joining our newsletter.</p>
+            </div>
+            <form class="input-btn-group">
+              <input class="form-control" type="text" placeholder="Enter your e-mail">
+              <button class="btn btn-theme btn-black" type="button">Subscribe!</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--== End Newsletter Area Wrapper ==-->
+
+    <!--== Start Blog Area Wrapper ==-->
+    <section class="blog-area blog-default-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-lg-6 m-auto" data-aos="fade-up" data-aos-duration="1000">
+            <div class="section-title text-center">
+              <h2 class="title">Latest Blog</h2>
+              <p>Follow our blog for collect information</p>
+            </div>
+          </div>
+        </div>
+        <div class="row" data-aos="fade-up" data-aos-duration="1000">
+          <div class="col-md-6">
+            <!--== Start Blog Post Item ==-->
+            <div class="post-item mb-md-150 mb-sm-30">
+              <div class="thumb">
+                <a href="blog-details.html"><img src="{% static 'assets/img/blog/1.webp' %}" alt="Alan-Blog"></a>
+              </div>
+              <div class="content">
+                <div class="inner-content">
+                  <h4 class="title">
+                    <a href="blog-details.html">There are many variations of passages</a>
+                  </h4>
+                  <div class="meta">
+                    <a class="post-date" href="blog.html">January 26, 2021</a>
+                    <span>/</span>
+                    <a class="post-author" href="blog.html">Demo Alan Admin</a>
+                  </div>
+                  <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the...</p>
+                  <a class="btn-blog" href="blog-details.html">Read More</a>
+                </div>
+              </div>
+            </div>
+            <!--== End Blog Post Item ==-->
+          </div>
+          <div class="col-md-6">
+            <!--== Start Blog Post Item ==-->
+            <div class="post-item mb-md-150 mb-sm-30">
+              <div class="thumb">
+                <a href="blog-details.html"><img src="{% static 'assets/img/blog/2.webp' %}" alt="Alan-Blog"></a>
+              </div>
+              <div class="content">
+                <div class="inner-content">
+                  <h4 class="title">
+                    <a href="blog-details.html">The standard chunk of lorem ipsum used since</a>
+                  </h4>
+                  <div class="meta">
+                    <a class="post-date" href="blog.html">January 26, 2021</a>
+                    <span>/</span>
+                    <a class="post-author" href="blog.html">Demo Alan Admin</a>
+                  </div>
+                  <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the...</p>
+                  <a class="btn-blog" href="blog-details.html">Read More</a>
+                </div>
+              </div>
+            </div>
+            <!--== End Blog Post Item ==-->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--== End Blog Area Wrapper ==-->
+  </main>
+
+  {% endblock content %}
