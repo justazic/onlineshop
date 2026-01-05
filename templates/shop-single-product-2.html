@@ -27,48 +27,15 @@
               <div class="single-product-thumb">
                 <div class="swiper-container single-product-thumb-slider">
                   <div class="swiper-wrapper">
+                    {% for image in product.images.all %}
                     <div class="swiper-slide zoom zoom-hover">
                       <div class="thumb-item">
-                        <a class="lightbox-image" data-fancybox="gallery" href="assets/img/shop/details/1.jpg">
-                          <img src="assets/img/shop/details/1.jpg" alt="Image-HasTech">
+                        <a class="lightbox-image" data-fancybox="gallery" href="{{image.image.url}}">
+                          <img src="{{product.image.url}}" alt="Image-HasTech">
                         </a>
                       </div>
                     </div>
-                    <div class="swiper-slide zoom zoom-hover">
-                      <div class="thumb-item">
-                        <a class="lightbox-image" data-fancybox="gallery" href="assets/img/shop/details/2.jpg">
-                          <img src="assets/img/shop/details/2.jpg" alt="Image-HasTech">
-                        </a>
-                      </div>
-                    </div>
-                    <div class="swiper-slide zoom zoom-hover">
-                      <div class="thumb-item">
-                        <a class="lightbox-image" data-fancybox="gallery" href="assets/img/shop/details/3.jpg">
-                          <img src="assets/img/shop/details/3.jpg" alt="Image-HasTech">
-                        </a>
-                      </div>
-                    </div>
-                    <div class="swiper-slide zoom zoom-hover">
-                      <div class="thumb-item">
-                        <a class="lightbox-image" data-fancybox="gallery" href="assets/img/shop/details/4.jpg">
-                          <img src="assets/img/shop/details/4.jpg" alt="Image-HasTech">
-                        </a>
-                      </div>
-                    </div>
-                    <div class="swiper-slide zoom zoom-hover">
-                      <div class="thumb-item">
-                        <a class="lightbox-image" data-fancybox="gallery" href="assets/img/shop/details/5.jpg">
-                          <img src="assets/img/shop/details/5.jpg" alt="Image-HasTech">
-                        </a>
-                      </div>
-                    </div>
-                    <div class="swiper-slide zoom zoom-hover">
-                      <div class="thumb-item">
-                        <a class="lightbox-image" data-fancybox="gallery" href="assets/img/shop/details/6.jpg">
-                          <img src="assets/img/shop/details/6.jpg" alt="Image-HasTech">
-                        </a>
-                      </div>
-                    </div>
+                    {% endfor %}
                   </div>
                 </div>
               </div>
@@ -117,33 +84,21 @@
               <p class="product-desc">{{product.desc}}</p>
               <div class="quick-product-action">
                 <div class="action-top">
-                  <div class="pro-qty">
-                      <input type="text" id="quantity" title="Quantity" value="1" />
-                  </div>
-                  <button class="btn btn-black"><i class="fa fa-opencart"></i>Add to cart</button>
-                  <a class="btn-wishlist" href="#"><i class="ti-heart"></i></a>
+                  <form action="{% url 'add_to_cart' product.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="pro-qty">
+                    <div class="product-number mb-3" style="display: inline-block; margin-right: 10px;">
+                      <label for="quantity" style="display: none;">Quantity:</label>
+                      <input type="number" id="quantity" name="quantity" value="1" min="1" style="width: 80px; height: 40px; padding: 0 10px;">
+                    </div>
+                    </div>
+                    <button type="submit" class="btn btn-black">
+                      <i class="fa fa-opencart"></i> Add to Cart
+                    </button>
+                    <a class="btn-wishlist" href="#"><i class="ti-heart"></i></a>
+                  </form>
                 </div>
-                <div class="action-bottom">
-                  <a class="btn-theme" href="shop-checkout.html">Buy it now</a>
-                </div>
-              </div>
-              <div class="payment-support">
-                <h5>Guaranteed Safe Checkout</h5>
-                <ul class="payment-items">
-                  <li class="payment-item">
-                    <svg class="payment-icon-name" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" role="img" width="38" height="24" aria-labelledby="pi-visa"><title id="pi-visa">Visa</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"></path><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"></path><path d="M28.3 10.1H28c-.4 1-.7 1.5-1 3h1.9c-.3-1.5-.3-2.2-.6-3zm2.9 5.9h-1.7c-.1 0-.1 0-.2-.1l-.2-.9-.1-.2h-2.4c-.1 0-.2 0-.2.2l-.3.9c0 .1-.1.1-.1.1h-2.1l.2-.5L27 8.7c0-.5.3-.7.8-.7h1.5c.1 0 .2 0 .2.2l1.4 6.5c.1.4.2.7.2 1.1.1.1.1.1.1.2zm-13.4-.3l.4-1.8c.1 0 .2.1.2.1.7.3 1.4.5 2.1.4.2 0 .5-.1.7-.2.5-.2.5-.7.1-1.1-.2-.2-.5-.3-.8-.5-.4-.2-.8-.4-1.1-.7-1.2-1-.8-2.4-.1-3.1.6-.4.9-.8 1.7-.8 1.2 0 2.5 0 3.1.2h.1c-.1.6-.2 1.1-.4 1.7-.5-.2-1-.4-1.5-.4-.3 0-.6 0-.9.1-.2 0-.3.1-.4.2-.2.2-.2.5 0 .7l.5.4c.4.2.8.4 1.1.6.5.3 1 .8 1.1 1.4.2.9-.1 1.7-.9 2.3-.5.4-.7.6-1.4.6-1.4 0-2.5.1-3.4-.2-.1.2-.1.2-.2.1zm-3.5.3c.1-.7.1-.7.2-1 .5-2.2 1-4.5 1.4-6.7.1-.2.1-.3.3-.3H18c-.2 1.2-.4 2.1-.7 3.2-.3 1.5-.6 3-1 4.5 0 .2-.1.2-.3.2M5 8.2c0-.1.2-.2.3-.2h3.4c.5 0 .9.3 1 .8l.9 4.4c0 .1 0 .1.1.2 0-.1.1-.1.1-.1l2.1-5.1c-.1-.1 0-.2.1-.2h2.1c0 .1 0 .1-.1.2l-3.1 7.3c-.1.2-.1.3-.2.4-.1.1-.3 0-.5 0H9.7c-.1 0-.2 0-.2-.2L7.9 9.5c-.2-.2-.5-.5-.9-.6-.6-.3-1.7-.5-1.9-.5L5 8.2z" fill="#142688"></path></svg>
-                  </li>
-                  <li>
-                    <svg class="payment-icon-name" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" role="img" width="38" height="24" aria-labelledby="pi-master"><title id="pi-master">Mastercard</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"></path><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"></path><circle fill="#EB001B" cx="15" cy="12" r="7"></circle><circle fill="#F79E1B" cx="23" cy="12" r="7"></circle><path fill="#FF5F00" d="M22 12c0-2.4-1.2-4.5-3-5.7-1.8 1.3-3 3.4-3 5.7s1.2 4.5 3 5.7c1.8-1.2 3-3.3 3-5.7z"></path></svg>
-                  </li>                
-                </ul>
-              </div>
-              <div class="widget-social-icons">
-                <a class="facebook" href="#/"><i class="ion-social-facebook"></i> Facebook</a>
-                <a class="twitter" href="#/"><i class="ion-social-twitter"></i> Twitter</a>
-                <a class="google-plus" href="#/"><i class="ion-social-googleplus-outline"></i> Google+</a>
-                <a class="pinterest" href="#/"><i class="ion-social-pinterest"></i> Pinterest</a>
-              </div>
+                
             </div>
           </div>
         </div>

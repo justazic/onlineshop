@@ -91,14 +91,26 @@
               <div class="header-action-usermenu">
                 <div class="icon-usermenu"><i class="ti-settings"></i></div>
                 <ul class="user-menu">
-                  <li><a href="account.html">My Account</a></li>
-                  <li><a href="about.html">About Us</a></li>
-                  <li><a href="contact.html">Contact Us</a></li>
-                  <li><a href="login.html">Login</a></li>
+                  {% if user.is_authenticated %}
+                    <li><a href="#">Salom, {{ user.first_name|default:user.username }}</a></li>
+                    <li><a href="account.html">My Account</a></li>
+                    <li><a href="{% url 'cart_detail' %}">My Cart</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" style="border: none; background: none; padding-left: 20px; color: #333;">Logout</button>
+                        </form>
+                    </li>
+                  {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                  {% endif %}
                 </ul>
               </div>
               <div class="header-action-cart">
-                <a class="cart-icon" href="shop-cart.html">
+                <a class="cart-icon" href="{% url 'cart_detail' %}">
                   <span class="cart-count">2</span>
                   <i class="ti-shopping-cart"></i>
                 </a>
@@ -343,27 +355,7 @@
 <!--=== Custom Js ===-->
 <script src="{% static 'assets/js/custom.js' %}"></script>
 
-<script>
-  jQuery(document).ready(function($) {
-  // Countdown JS
-    var now = new Date();
-    var day = now.getDate();
-    var month = now.getMonth() + 1;
-    var year = now.getFullYear() + 1;
 
-    var nextyear = month + '/' + day + '/' + year + ' 07:07:07';
-
-    $('.countdown-timer').countdown({
-      date: '4/12/2021 23:59:59', // TODO Date format: 07/27/2017 17:00:00
-      offset: +2, // TODO Your Timezone Offset
-      day: 'Day',
-      days: 'Days',
-      hideOnComplete: true
-    }, function (container) {
-      alert('Done!');
-    });
-  });
-</script>
 
 </body>
 

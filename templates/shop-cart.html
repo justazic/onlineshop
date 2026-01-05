@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+  <main class="main-content site-wrapper-reveal">
+    <!--== Start Page Title Area ==-->
+    <section class="page-title-area" data-bg-img="assets/img/photos/bg-page-title.webp">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="page-title-content text-center">
+              <h2 class="title text-white">YOUR SHOPPING CART</h2>
+              <div class="bread-crumbs"><a href="index.html">Home<span class="breadcrumb-sep">/</span></a><span class="active">Your Shopping Cart</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--== End Page Title Area ==-->
+
+    <!--== Start Cart Area Wrapper ==-->
+    <section class="cart-page-area">
+      <div class="container pt-100 pb-100">
+        <div class="row">
+          <div class="col-12">
+            <div class="cart-table table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="pro-thumbnail">Image</th>
+                    <th class="pro-title">Product</th>
+                    <th class="pro-price">Price</th>
+                    <th class="pro-quantity">Quantity</th>
+                    <th class="pro-subtotal">Total</th>
+                    <th class="pro-remove">Remove</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for i in items %}
+                  <tr>
+                    <td class="pro-thumbnail">
+                      <a href="#"><img src="{{ i.product.image.url }}" alt="Alan-Shop"></a>
+                    </td>
+                    <td class="pro-title">
+                      <h4><a href="#/">{{ i.product.name }}</a></h4>
+                      <span>m / gold</span>
+                    </td>
+                    <td class="pro-price"><span>{{i.product.discount_price}}</span></td>
+                    <td class="pro-quantity">
+                      <div class="quick-product-action">
+                        <div class="pro-qty">
+                          <input type="text" id="quantity" title="Quantity" value="{{ i.quantity }}" />
+                        </div>
+                      </div>
+                    </td>
+                    <td class="pro-subtotal"><span>{{i.total_price}}</span></td>
+                    <td class="pro-remove"><a href="{% url 'remove_cart' i.id %}">×</a></td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="cart-buttons">
+              <a class="btn-shopping update-cart" href="#/">Update Cart</a>
+              <a class="btn-shopping continue-shopping" href="{% url 'products' %}">Continue Shopping</a>
+              <a class="btn-shopping" href="#/">Clear Cart</a>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="cart-payment">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="culculate-shipping">
+                    <h3 class="title">Get shipping estimatesss</h3>
+                    <form action="#">
+                      <div class="form-group">
+                        <select class="form-control form-select" aria-label="address country">
+                          <option selected>---</option>
+                          <option value="1">Afghanistan</option>
+                          <option value="2">Åland Islands</option>
+                          <option value="3">Albania</option>
+                          <option value="4">Algeria</option>
+                          <option value="5">Andorra</option>
+                          <option value="6">Angola</option>
+                          <option value="7">Anguilla</option>
+                          <option value="8">Antigua & Barbuda</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Zip/Postal Code">
+                      </div>
+                    </form>
+                    <a class="btn-theme" href="#/">Calculate shipping</a>
+                    <p class="text">Error : country is not supported; zip can't be blank.</p>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="cart-subtotal">
+                    <h3 class="title">Cart Totals</h3>
+                    <table>
+                      <tbody>
+                        <tr class="cart-subtotal">
+                          <th>Subtotal</th>
+                          <td>
+                            <span class="amount">$204.39</span>
+                          </td>
+                        </tr>
+                        <tr class="order-total">
+                          <th>Total</th>
+                          <td>
+                            <span class="price">$204.39</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <a class="btn-theme" href="#/">Proceed to Checkout</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--== End Cart Area Wrapper ==-->
+  </main>
+{%endblock content%}
